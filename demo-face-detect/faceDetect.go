@@ -58,6 +58,8 @@ func main() {
 			continue
 		}
 
+		newMath := gocv.NewMat()
+
 		// detect faces
 		rects := classifier.DetectMultiScale(img)
 		fmt.Printf("found %d faces\n", len(rects))
@@ -72,8 +74,10 @@ func main() {
 			gocv.PutText(&img, "Human", pt, gocv.FontHersheyPlain, 1.2, blue, 2)
 		}
 
+		//canny algorithmn
+		gocv.Canny(img, &newMath, 100, 200)
 		// show the image in the window, and wait 1 millisecond
-		window.IMShow(img)
+		window.IMShow(newMath)
 		if window.WaitKey(1) >= 0 {
 			break
 		}
